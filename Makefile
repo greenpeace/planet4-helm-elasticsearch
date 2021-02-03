@@ -3,7 +3,7 @@ SHELL := /bin/bash
 RELEASE 	?= p4-es
 NAMESPACE	?= default
 
-CHART_NAME ?= stable/elasticsearch
+CHART_NAME ?= center/stable/elasticsearch
 CHART_VERSION ?= 1.32.4
 
 DEV_CLUSTER ?= p4-development
@@ -28,8 +28,11 @@ lint-ci:
 		@circleci config validate
 
 # Helm Initialisation
+init:
+	helm3 repo add center https://repo.chartcenter.io
+	helm3 repo update
 
-dev: lint
+dev: lint init
 ifndef CI
 	$(error Please commit and push, this is intended to be run in a CI environment)
 endif
@@ -44,7 +47,7 @@ endif
 		$(CHART_NAME)
 	$(MAKE) history
 
-prod: lint
+prod: lint init
 ifndef CI
 	$(error Please commit and push, this is intended to be run in a CI environment)
 endif
