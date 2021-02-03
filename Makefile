@@ -28,9 +28,6 @@ lint-ci:
 		@circleci config validate
 
 # Helm Initialisation
-init:
-
-	helm3 repo update
 
 dev: lint init
 ifndef CI
