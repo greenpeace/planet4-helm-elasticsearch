@@ -29,7 +29,7 @@ lint-ci:
 
 # Helm Initialisation
 
-dev: lint init
+dev: lint
 ifndef CI
 	$(error Please commit and push, this is intended to be run in a CI environment)
 endif
@@ -44,7 +44,7 @@ endif
 		$(CHART_NAME)
 	$(MAKE) history
 
-prod: lint init
+prod: lint
 ifndef CI
 	$(error Please commit and push, this is intended to be run in a CI environment)
 endif
