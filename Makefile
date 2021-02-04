@@ -1,7 +1,9 @@
+SHELL := /bin/bash
+
 RELEASE 	?= p4-es
 NAMESPACE	?= default
 
-CHART_NAME ?= stable/elasticsearch
+CHART_NAME ?= center/stable/elasticsearch
 CHART_VERSION ?= 1.32.4
 
 DEV_CLUSTER ?= p4-development
@@ -14,24 +16,21 @@ PROD_ZONE ?= us-central1-a
 
 .DEFAULT_TARGET := status
 
-.PHONY: clean deploy
+.DEFAULT_TARGET: status
 
-all: deploy
+lint: lint-yaml lint-ci
 
-lint:
-	@find . -type f -name '*.yml' | xargs yamllint
-	@find . -type f -name '*.yaml' | xargs yamllint
+lint-yaml:
+		@find . -type f -name '*.yml' | xargs yamllint
+		@find . -type f -name '*.yaml' | xargs yamllint
 
+lint-ci:
+		@circleci config validate
+
+# Helm Initialisation
 init:
-	helm init --client-only
-	helm repo update
-
-port:
-	@echo "Visit http://127.0.0.1:9200 to use Elasticsearch"
-	kubectl port-forward --namespace $(NAMESPACE) $(shell kubectl get service --namespace $(NAMESPACE) -l "app=elasticsearch,component=client,release=$(RELEASE)" -o name) 9200:9200
-
-status:
-	helm status $(RELEASE)
+	helm3 repo add center https://repo.chartcenter.io
+	helm3 repo update
 
 dev: lint init
 ifndef CI
@@ -39,11 +38,12 @@ ifndef CI
 endif
 	gcloud config set project $(DEV_PROJECT)
 	gcloud container clusters get-credentials $(DEV_CLUSTER) --zone $(DEV_ZONE) --project $(DEV_PROJECT)
-	helm upgrade --install --force --wait $(RELEASE) \
+	-kubectl create namespace $(NAMESPACE)
+	helm3 upgrade --install --wait $(RELEASE) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
 		-f values.yaml \
-		-f env/dev/values.yaml \
+		--values env/dev/values.yaml \
 		$(CHART_NAME)
 	$(MAKE) history
 
@@ -54,27 +54,40 @@ endif
 	gcloud config set project $(PROD_PROJECT)
 	gcloud container clusters get-credentials $(PROD_PROJECT) --zone $(PROD_ZONE) --project $(PROD_PROJECT)
 	-kubectl label namespace $(NAMESPACE)
-	helm upgrade --install --force --wait $(RELEASE) \
+	helm3 upgrade --install --wait $(RELEASE) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
 		-f values.yaml \
-		-f env/prod/values.yaml \
+		--values env/prod/values.yaml \
 		$(CHART_NAME)
 	$(MAKE) history
 
+port:
+	@echo "Visit http://127.0.0.1:9200 to use Elasticsearch"
+	kubectl port-forward --namespace $(NAMESPACE) $(shell kubectl get service --namespace $(NAMESPACE) -l "app=elasticsearch,component=client,release=$(RELEASE)" -o name) 9200:9200
 
+# Helm status
+status:
+	helm3 status $(RELEASE) -n $(NAMESPACE)
+
+# Display user values followed by all values
+values:
+	helm3 get values $(RELEASE) -n $(NAMESPACE)
+	helm3 get values $(RELEASE) -n $(NAMESPACE) -a
+
+# Display helm history
 history:
-	helm history $(RELEASE) --max=5
+	helm3 history $(RELEASE) -n $(NAMESPACE) --max=5
 
+# Delete a release when you intend reinstalling it to keep history
+uninstall:
+	helm3 uninstall $(RELEASE) -n $(NAMESPACE) --keep-history
 
+# Completely remove helm install, config data, persistent volumes etc.
+# Before running this ensure you have deleted any other related config
 destroy:
-	helm delete $(RELEASE) --purge
+	@echo -n "You are about to ** DELETE DATA **, enter y if your sure ? [y/N] " && read ans && [ $${ans:-N} = y ]
+	helm3 uninstall $(RELEASE) -n $(NAMESPACE)
 	kubectl delete pvc -l release=$(RELEASE),component=data -n $(NAMESPACE)
 	kubectl delete pvc -l release=$(RELEASE),component=master -n $(NAMESPACE)
 	kubectl delete statefulset $(RELEASE)-es-elasticsearch-data -n $(NAMESPACE)
-
-
-deploy:
-	helm upgrade --install --force $(RELEASE) $(CHART) \
-		-f values.yaml \
-		--namespace $(NAMESPACE)
