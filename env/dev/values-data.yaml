@@ -1,5 +1,5 @@
 ---
-esJavaOpts: -Xmx1g -Xms1g
+esJavaOpts: -Xmx2g -Xms2g
 resources:
   requests:
     cpu: 100m

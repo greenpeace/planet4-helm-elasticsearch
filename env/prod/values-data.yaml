@@ -1,5 +1,5 @@
 ---
-esJavaOpts: -Xmx4096g -Xms4096g
+esJavaOpts: -Xmx4g -Xms4g
 resources:
   requests:
     cpu: 200m
