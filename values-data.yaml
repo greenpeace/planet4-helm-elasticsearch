@@ -1,0 +1,13 @@
+---
+nodeGroup: data
+rbac:
+  create: true
+replicas: 2
+roles:
+  data: "true"
+  ingest: "true"
+  master: "false"
+  ml: "false"
+  remote_cluster_client: "false"
+volumeClaimTemplate:
+  storageClassName: ssd

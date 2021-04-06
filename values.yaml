@@ -1,11 +1,4 @@
 ---
-
-image:
-  repository: gcr.io/planet-4-151612/elasticsearch
-  tag: latest
-
-rbac:
-  create: true
-data:
-  persistence:
-    storageClass: ssd
+clusterName: elasticsearch
+image: gcr.io/planet-4-151612/elasticsearch
+imageTag: 7.9.3

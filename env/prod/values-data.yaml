@@ -1,0 +1,9 @@
+---
+esJavaOpts: -Xmx4096g -Xms4096g
+resources:
+  requests:
+    cpu: 200m
+    memory: 4Gi
+  limits:
+    cpu: 400m
+    memory: 8Gi
