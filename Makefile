@@ -80,7 +80,7 @@ endif
 		--version $(CHART_VERSION) \
 		--values values.yaml \
 		--values values-master.yaml \
-		--values env/prod/values.yaml \
+		--values env/prod/values-master.yaml \
 		$(CHART_NAME)
 	helm3 history $(RELEASE-MASTER) -n $(NAMESPACE) --max=5
 	helm3 upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-DATA) \
@@ -88,7 +88,7 @@ endif
 		--version $(CHART_VERSION) \
 		--values values.yaml \
 		--values values-data.yaml \
-		--values env/prod/values.yaml \
+		--values env/prod/values-data.yaml \
 		$(CHART_NAME)
 	helm3 history $(RELEASE-DATA) -n $(NAMESPACE) --max=5
 	helm3 upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-CLIENT) \
@@ -96,7 +96,7 @@ endif
 		--version $(CHART_VERSION) \
 		--values values.yaml \
 		--values values-client.yaml \
-		--values env/prod/values.yaml \
+		--values env/prod/values-client.yaml \
 		$(CHART_NAME)
 	helm3 history $(RELEASE-CLIENT) -n $(NAMESPACE) --max=5	
 port:
