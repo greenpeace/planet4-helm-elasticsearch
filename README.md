@@ -11,8 +11,8 @@ Elasticsearch is the distributed search and analytics engine at the heart of the
 - Elasticpress plugin in WP
 - [Docker Image for plugins](https://github.com/greenpeace/planet4-docker-elasticsearch)
 - [ES-exporter](https://github.com/greenpeace/planet4-helm-esexporter)
-- [Kibana]()
-- APM()
+- [Kibana](https://github.com/greenpeace/planet4-helm-kibana)
+- [APM](https://github.com/greenpeace/planet4-helm-apm)
 
 ***
 ### Requirements - Internal Only
