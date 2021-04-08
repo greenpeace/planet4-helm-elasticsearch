@@ -101,7 +101,7 @@ endif
 	helm3 history $(RELEASE-CLIENT) -n $(NAMESPACE) --max=5	
 port:
 	@echo "Visit http://127.0.0.1:9200 to use Elasticsearch"
-	kubectl port-forward --namespace $(NAMESPACE) $(shell kubectl get service --namespace $(NAMESPACE) -l "app=elasticsearch,component=client,release=$(RELEASE)" -o name) 9200:9200
+	kubectl port-forward --namespace $(NAMESPACE) $(shell kubectl get pod --namespace elastic --selector="app=elasticsearch-client,chart=elasticsearch,release=p4-es-client" --output jsonpath='{.items[0].metadata.name}') 9200:9200
 
 # Helm status
 status:
