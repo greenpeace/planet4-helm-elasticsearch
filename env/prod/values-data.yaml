@@ -1,9 +1,9 @@
 ---
-esJavaOpts: -Xmx4g -Xms4g
+esJavaOpts: -Xmx8g -Xms8g
 resources:
   requests:
     cpu: 1
-    memory: 4Gi
-  limits:
-    cpu: 2
     memory: 8Gi
+  limits:
+    cpu: 4
+    memory: 12Gi
