@@ -4,5 +4,3 @@ resources:
   requests:
     cpu: 750m
     memory: 9Gi
-  limits:
-    memory: 12Gi
