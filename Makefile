@@ -8,7 +8,7 @@ NAMESPACE	?= elastic
 TIMEOUT := 1200s
 
 CHART_NAME ?= elastic/elasticsearch
-CHART_VERSION ?= 7.16.3
+CHART_VERSION ?= 7.15.0
 
 DEV_CLUSTER ?= p4-development
 DEV_PROJECT ?= planet-4-151612
