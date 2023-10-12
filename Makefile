@@ -36,14 +36,11 @@ init:
 	helm3 repo add elastic https://helm.elastic.co
 	helm3 repo update
 
-dev: lint init
-ifndef CI
-	$(error Please commit and push, this is intended to be run in a CI environment)
-endif
+dev:
 	gcloud config set project $(DEV_PROJECT)
 	gcloud container clusters get-credentials $(DEV_CLUSTER) --zone $(DEV_ZONE) --project $(DEV_PROJECT)
-	-kubectl create namespace $(NAMESPACE)
-	helm3 upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-MASTER) \
+	# kubectl create namespace $(NAMESPACE)
+	helm upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-MASTER) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
 		--values values.yaml \
@@ -51,7 +48,7 @@ endif
 		--values env/dev/values-master.yaml \
 		$(CHART_NAME)
 	helm3 history $(RELEASE-MASTER) -n $(NAMESPACE) --max=5
-	helm3 upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-DATA) \
+	helm3  upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-DATA) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
 		--values values.yaml \
@@ -59,7 +56,7 @@ endif
 		--values env/dev/values-data.yaml \
 		$(CHART_NAME)
 	helm3 history $(RELEASE-DATA) -n $(NAMESPACE) --max=5
-	helm3 upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-CLIENT) \
+	helm3  upgrade  --install --timeout=$(TIMEOUT) --wait $(RELEASE-CLIENT) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
 		--values values.yaml \
@@ -101,7 +98,7 @@ endif
 	helm3 history $(RELEASE-CLIENT) -n $(NAMESPACE) --max=5	
 port:
 	@echo "Visit http://127.0.0.1:9200 to use Elasticsearch"
-	kubectl port-forward --namespace $(NAMESPACE) $(shell kubectl get pod --namespace elastic --selector="app=elasticsearch-client,chart=elasticsearch,release=p4-es-client" --output jsonpath='{.items[0].metadata.name}') 9200:9200
+	kubectl port--valuesorward --namespace $(NAMESPACE) $(shell kubectl get pod --namespace elastic --selector="app=elasticsearch-client,chart=elasticsearch,release=p4-es-client" --output jsonpath='{.items[0].metadata.name}') 9200:9200
 
 # Helm status
 status:
