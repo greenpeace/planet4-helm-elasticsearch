@@ -33,8 +33,8 @@ lint-ci:
 
 # Helm Initialisation
 init:
-	helm3 repo add elastic https://helm.elastic.co
-	helm3 repo update
+	helm repo add elastic https://helm.elastic.co
+	helm repo update
 
 dev:
 	gcloud config set project $(DEV_PROJECT)
@@ -46,27 +46,23 @@ dev:
 		--values values.yaml \
 		--values values-master.yaml \
 		--values env/dev/values-master.yaml \
-		--set maxUnavailable=null \
 		$(CHART_NAME)
-	helm3 history $(RELEASE-MASTER) -n $(NAMESPACE) --max=5
-	helm3  upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-DATA) \
+	helm history $(RELEASE-MASTER) -n $(NAMESPACE) --max=5
+	helm  upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-DATA) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
 		--values values.yaml \
 		--values values-data.yaml \
 		--values env/dev/values-data.yaml \
-		--set maxUnavailable=null \
 		$(CHART_NAME)
-	helm3 history $(RELEASE-DATA) -n $(NAMESPACE) --max=5
-	helm3  upgrade  --install --timeout=$(TIMEOUT) --wait $(RELEASE-CLIENT) \
+	helm history $(RELEASE-DATA) -n $(NAMESPACE) --max=5
+	helm  upgrade  --install --timeout=$(TIMEOUT) --wait $(RELEASE-CLIENT) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
 		--values values.yaml \
 		--values values-client.yaml \
-		--values env/dev/values-client.yaml \
-		--set maxUnavailable=null \
 		$(CHART_NAME)
-	helm3 history $(RELEASE-CLIENT) -n $(NAMESPACE) --max=5	
+	helm history $(RELEASE-CLIENT) -n $(NAMESPACE) --max=5	
 
 prod: lint init
 ifndef CI
@@ -105,21 +101,21 @@ port:
 
 # Helm status
 status:
-	helm3 status $(RELEASE-MASTER) -n $(NAMESPACE)
-	helm3 status $(RELEASE-DATA) -n $(NAMESPACE)
-	helm3 status $(RELEASE-CLIENT) -n $(NAMESPACE)
+	helm status $(RELEASE-MASTER) -n $(NAMESPACE)
+	helm status $(RELEASE-DATA) -n $(NAMESPACE)
+	helm status $(RELEASE-CLIENT) -n $(NAMESPACE)
 
 # Display user values
 values:
-	helm3 get values $(RELEASE-MASTER) -n $(NAMESPACE)
-	helm3 get values $(RELEASE-DATA) -n $(NAMESPACE)
-	helm3 get values $(RELEASE-CLIENT) -n $(NAMESPACE)
+	helm get values $(RELEASE-MASTER) -n $(NAMESPACE)
+	helm get values $(RELEASE-DATA) -n $(NAMESPACE)
+	helm get values $(RELEASE-CLIENT) -n $(NAMESPACE)
 
 # Display helm history
 history:
-	helm3 history $(RELEASE-MASTER) -n $(NAMESPACE) --max=5
-	helm3 history $(RELEASE-DATA) -n $(NAMESPACE) --max=5
-	helm3 history $(RELEASE-CLIENT) -n $(NAMESPACE) --max=5
+	helm history $(RELEASE-MASTER) -n $(NAMESPACE) --max=5
+	helm history $(RELEASE-DATA) -n $(NAMESPACE) --max=5
+	helm history $(RELEASE-CLIENT) -n $(NAMESPACE) --max=5
 
 # Delete a release when you intend reinstalling it to keep history
 uninstall:
