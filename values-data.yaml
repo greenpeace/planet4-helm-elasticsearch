@@ -11,14 +11,6 @@ roles:
   remote_cluster_client: "false"
 volumeClaimTemplate:
   storageClassName: ssd
-# volumeClaimTemplate:
-#   accessModes: [ "ReadWriteOnce" ]
-#   storageClassName: "standard"
-#   resources:
-#     requests:
-#       storage: 512M
-
-antiAffinity: "best effort"
 
 extraInitContainers:
   - name: file-permissions

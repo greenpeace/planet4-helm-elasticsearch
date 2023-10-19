@@ -7,8 +7,6 @@ roles:
   remote_cluster_client: "false"
   ml: "false"
 
-antiAffinity: "best effort"
-
 extraInitContainers:
   - name: file-permissions
     image: busybox
