@@ -9,5 +9,11 @@ roles:
   master: "false"
   ml: "false"
   remote_cluster_client: "false"
-volumeClaimTemplate:
-  storageClassName: ssd
+# volumeClaimTemplate:
+#   storageClassName: ssd
+# volumeClaimTemplate:
+#   accessModes: [ "ReadWriteOnce" ]
+#   storageClassName: "standard"
+#   resources:
+#     requests:
+#       storage: 512M

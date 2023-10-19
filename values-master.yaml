@@ -13,3 +13,18 @@ roles:
 #     value: "false"
 #   - name: xpack.security.http.ssl.enabled 
 #     value: "false"
+
+antiAffinity: "soft"
+
+esJavaOpts: "-Xmx1g -Xms1g"
+
+extraInitContainers:
+  - name: file-permissions
+    image: busybox
+    command: ['chown', '-R', '1000:1000', '/usr/share/elasticsearch/']
+    volumeMounts:
+    - mountPath: /usr/share/elasticsearch/data
+      name: elasticsearch-master
+    securityContext:
+      privileged: true
+      runAsUser: 0
