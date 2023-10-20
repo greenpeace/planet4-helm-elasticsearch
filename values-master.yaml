@@ -7,6 +7,8 @@ roles:
   remote_cluster_client: "false"
   ml: "false"
 
+esJavaOpts: "-Xmx1g -Xms1g"
+
 extraInitContainers:
   - name: file-permissions
     image: busybox
