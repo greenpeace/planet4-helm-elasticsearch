@@ -1,11 +1,8 @@
 ---
 nodeGroup: "master"
 roles:
-  master: "true"
-  ingest: "false"
-  data: "false"
-  remote_cluster_client: "false"
-  ml: "false"
+  - master
+
 
 esJavaOpts: "-Xmx1g -Xms1g"
 

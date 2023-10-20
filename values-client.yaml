@@ -3,10 +3,5 @@ nodeGroup: "client"
 persistence:
   enabled: false
 replicas: 2
-roles:
-  data: "false"
-  ingest: "false"
-  master: "false"
-  ml: "false"
-  remote_cluster_client: "false"
+
 

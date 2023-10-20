@@ -5,10 +5,10 @@ RELEASE-MASTER ?= $(PREFIX)-master
 RELEASE-DATA ?= $(PREFIX)-data
 RELEASE-CLIENT ?= $(PREFIX)-client
 NAMESPACE	?= elastic
-TIMEOUT := 120s
+TIMEOUT := 1200s
 
 CHART_NAME ?= elastic/elasticsearch
-CHART_VERSION ?= 7.17.3
+CHART_VERSION ?= 8.5.1
 
 DEV_CLUSTER ?= p4-development
 DEV_PROJECT ?= planet-4-151612

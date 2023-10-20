@@ -4,11 +4,9 @@ rbac:
   create: true
 replicas: 2
 roles:
-  data: "true"
-  ingest: "true"
-  master: "false"
-  ml: "false"
-  remote_cluster_client: "false"
+  - data
+  - ingest
+
 volumeClaimTemplate:
   storageClassName: ssd
 
