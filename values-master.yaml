@@ -5,7 +5,7 @@ roles:
   ingest: "false"
   data: "false"
   remote_cluster_client: "false"
-  ml: "false"
+  # ml: "false"
 
 esJavaOpts: "-Xmx1g -Xms1g"
 
