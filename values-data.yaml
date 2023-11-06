@@ -1,5 +1,5 @@
 ---
-nodeGroup: data
+nodeGroup: "data"
 rbac:
   create: true
 replicas: 2
@@ -12,6 +12,8 @@ roles:
   
 volumeClaimTemplate:
   storageClassName: ssd
+
+esJavaOpts: "-Xmx1g -Xms1g"
 
 extraInitContainers:
   - name: file-permissions

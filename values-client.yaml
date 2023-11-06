@@ -1,5 +1,5 @@
 ---
-nodeGroup: client
+nodeGroup: "client"
 persistence:
   enabled: false
 replicas: 2
@@ -9,3 +9,4 @@ roles:
   master: "false"
   ml: "false"
   remote_cluster_client: "false"
+
