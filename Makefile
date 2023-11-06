@@ -8,7 +8,7 @@ NAMESPACE	?= elastic
 TIMEOUT := 1200s
 
 CHART_NAME ?= elastic/elasticsearch
-CHART_VERSION ?= 8.5.1
+CHART_VERSION ?= 7.10.2
 
 DEV_CLUSTER ?= p4-development
 DEV_PROJECT ?= planet-4-151612
@@ -39,8 +39,8 @@ init:
 dev:
 	gcloud config set project $(DEV_PROJECT)
 	gcloud container clusters get-credentials $(DEV_CLUSTER) --zone $(DEV_ZONE) --project $(DEV_PROJECT)
-	# kubectl create namespace $(NAMESPACE)
-	helm upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-MASTER) \
+	-kubectl create namespace $(NAMESPACE)
+	helm3 upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-MASTER) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
 		--values values.yaml \

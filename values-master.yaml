@@ -1,6 +1,19 @@
 ---
 nodeGroup: "master"
 roles:
-  -  master
+  data: "false"
+  ingest: "false"
+  master: "true"
+  ml: "false"
+  remote_cluster_client: "false"
 
-
+extraInitContainers:
+  - name: file-permissions
+    image: busybox
+    command: ['chown', '-R', '1000:1000', '/usr/share/elasticsearch/']
+    volumeMounts:
+    - mountPath: /usr/share/elasticsearch/data
+      name: elasticsearch-master
+    securityContext:
+      privileged: true
+      runAsUser: 0
