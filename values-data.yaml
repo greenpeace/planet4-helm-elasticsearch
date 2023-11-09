@@ -1,5 +1,5 @@
 ---
-nodeGroup: data
+nodeGroup: "data"
 rbac:
   create: true
 replicas: 2
@@ -9,6 +9,7 @@ roles:
   master: "false"
   ml:
   remote_cluster_client: "false"
+  
 volumeClaimTemplate:
   storageClassName: ssd
 
