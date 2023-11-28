@@ -1,12 +1,10 @@
 ---
 clusterName: elasticsearch
 image: gcr.io/planet-4-151612/elasticsearch
-imageTag: 7.10.2-gcs
+imageTag: 7.10.2
 # https://www.elastic.co/guide/en/elasticsearch/reference/7.8/cluster-health.html#request-params_wait_for_status
 clusterHealthCheckParams: "wait_for_status=yellow&timeout=1s"
 
 maxUnavailable: 0
 
-keystore:
-  - secretName: gcp-backup-key
 #kubectl create secret generic gcp-backup-key --from-file=gcs.client.default.credentials_file=./credentials.json -n elastic

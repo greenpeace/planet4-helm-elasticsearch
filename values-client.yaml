@@ -10,3 +10,4 @@ roles:
   ml:
   remote_cluster_client: "false"
 
+clusterDeprecationIndexing:

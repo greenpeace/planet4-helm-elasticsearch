@@ -9,6 +9,8 @@ roles:
   master: "false"
   ml:
   remote_cluster_client: "false"
+
+clusterDeprecationIndexing:
   
 volumeClaimTemplate:
   storageClassName: ssd

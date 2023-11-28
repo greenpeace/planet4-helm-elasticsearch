@@ -1,11 +1,12 @@
----
 nodeGroup: "master"
 roles:
   master: "true"
   ingest: "false"
   data: "false"
-  ml:
+  ml: 
   remote_cluster_client: "false"
+
+clusterDeprecationIndexing:
 
 extraInitContainers:
   - name: file-permissions
