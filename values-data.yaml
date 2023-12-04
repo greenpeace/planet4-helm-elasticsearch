@@ -11,3 +11,5 @@ roles:
   remote_cluster_client: "false"
 volumeClaimTemplate:
   storageClassName: ssd
+
+clusterDeprecationIndexing:
