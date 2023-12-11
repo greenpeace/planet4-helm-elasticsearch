@@ -4,3 +4,6 @@ resources:
   requests:
     cpu: 750m
     memory: 9Gi
+  limits:
+    cpu: "1000m"
+    memory: "9Gi"

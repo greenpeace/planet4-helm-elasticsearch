@@ -6,5 +6,3 @@ imageTag: 7.10.2
 clusterHealthCheckParams: "wait_for_status=yellow&timeout=1s"
 
 maxUnavailable: 0
-
-#kubectl create secret generic gcp-backup-key --from-file=gcs.client.default.credentials_file=./credentials.json -n elastic
