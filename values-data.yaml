@@ -7,7 +7,9 @@ roles:
   data: "true"
   ingest: "true"
   master: "false"
-  ml: "false"
+  ml:
   remote_cluster_client: "false"
 volumeClaimTemplate:
   storageClassName: ssd
+
+clusterDeprecationIndexing:

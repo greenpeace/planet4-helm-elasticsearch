@@ -7,5 +7,7 @@ roles:
   data: "false"
   ingest: "false"
   master: "false"
-  ml: "false"
+  ml:
   remote_cluster_client: "false"
+
+clusterDeprecationIndexing:
