@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Notify failure
           when: on_fail
-          command: >
+          command: |
             TYPE="Test" \
             EXTRA_TEXT="```$(cat /tmp/lint.log)```" \
             notify-job-failure.sh
