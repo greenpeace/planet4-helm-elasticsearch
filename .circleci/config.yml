@@ -45,13 +45,13 @@ jobs:
       - run:
           name: Notify failure
           when: on_fail
-          command: >
+          command: |
             TYPE="Deploy" \
             EXTRA_TEXT="```$(cat /tmp/deploy.log)```" \
             notify-job-failure.sh
       - run:
           name: Notify success
-          command: >
+          command: |
             TYPE="Deploy" \
             EXTRA_TEXT="```$(make history)```" \
             notify-job-success.sh
@@ -76,13 +76,13 @@ jobs:
       - run:
           name: Notify failure
           when: on_fail
-          command: >
+          command: |
             TYPE="Deploy" \
             EXTRA_TEXT="```$(cat /tmp/deploy.log)```" \
             notify-job-failure.sh
       - run:
           name: Notify success
-          command: >
+          command: |
             TYPE="Deploy" \
             EXTRA_TEXT="```$(make history)```" \
             notify-job-success.sh
