@@ -27,4 +27,3 @@ extraInitContainers:
     securityContext:
       privileged: true
       runAsUser: 0
-    
