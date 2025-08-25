@@ -30,11 +30,7 @@ lint-yaml:
 	@find . -type f -name '*.yaml' | xargs yamllint
 
 lint-ci:
-	@if command -v circleci >/dev/null 2>&1; then \
-		circleci config validate; \
-	else \
-		echo "circleci CLI not found, skipping lint-ci"; \
-	fi
+	@circleci config validate
 
 fmt:
 	@echo "🔧 Auto-formatting YAML files..."
