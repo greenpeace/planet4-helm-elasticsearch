@@ -21,8 +21,8 @@ jobs:
           name: Notify failure
           when: on_fail
           command: |
-            TYPE="Test" \
-            EXTRA_TEXT="```$(cat /tmp/lint.log)```" \
+            TYPE="Test"
+            EXTRA_TEXT="```$(cat /tmp/lint.log)```"
             notify-job-failure.sh
 
   dev:
@@ -46,14 +46,14 @@ jobs:
           name: Notify failure
           when: on_fail
           command: |
-            TYPE="Deploy" \
-            EXTRA_TEXT="```$(cat /tmp/deploy.log)```" \
+            TYPE="Deploy"
+            EXTRA_TEXT="```$(cat /tmp/deploy.log)```"
             notify-job-failure.sh
       - run:
           name: Notify success
           command: |
-            TYPE="Deploy" \
-            EXTRA_TEXT="```$(make history)```" \
+            TYPE="Deploy"
+            EXTRA_TEXT="```$(make history)```"
             notify-job-success.sh
 
   prod:
@@ -77,14 +77,14 @@ jobs:
           name: Notify failure
           when: on_fail
           command: |
-            TYPE="Deploy" \
-            EXTRA_TEXT="```$(cat /tmp/deploy.log)```" \
+            TYPE="Deploy"
+            EXTRA_TEXT="```$(cat /tmp/deploy.log)```"
             notify-job-failure.sh
       - run:
           name: Notify success
           command: |
-            TYPE="Deploy" \
-            EXTRA_TEXT="```$(make history)```" \
+            TYPE="Deploy"
+            EXTRA_TEXT="```$(make history)```"
             notify-job-success.sh
 
 workflows:
