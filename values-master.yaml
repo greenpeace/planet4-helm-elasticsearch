@@ -6,9 +6,7 @@ roles:
   data: "false"
   ml:
   remote_cluster_client: "false"
-
 clusterDeprecationIndexing:
-
 extraInitContainers:
   - name: file-permissions
     image: busybox
@@ -19,4 +17,3 @@ extraInitContainers:
     securityContext:
       privileged: true
       runAsUser: 0
-
