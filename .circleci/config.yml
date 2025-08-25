@@ -34,7 +34,9 @@ jobs:
       - run:
           name: Install Helm 3
           command: |
-            curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+            curl -fsSL \
+              https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 \
+              | bash
             helm version
       - run: activate-gcloud-account.sh
       - deploy:
@@ -63,7 +65,9 @@ jobs:
       - run:
           name: Install Helm 3
           command: |
-            curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+            curl -fsSL \
+              https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 \
+              | bash
             helm version
       - run: activate-gcloud-account.sh
       - deploy:
