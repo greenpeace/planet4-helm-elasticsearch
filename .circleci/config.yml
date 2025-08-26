@@ -21,23 +21,15 @@ jobs:
           name: Notify failure
           when: on_fail
           command: |
-            TYPE="Test"
-            EXTRA_TEXT="```$(cat /tmp/lint.log)```"
+            TYPE="Test" \
+            EXTRA_TEXT="\`\`\`$(cat /tmp/lint.log)\`\`\`" \
             notify-job-failure.sh
-
   dev:
     <<: *defaults
     environment:
       GOOGLE_PROJECT_ID: planet-4-151612
     steps:
       - checkout
-      - run:
-          name: Install Helm 3
-          command: |
-            curl -fsSL \
-              https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 \
-              | bash
-            helm version
       - run: activate-gcloud-account.sh
       - deploy:
           name: Deploy to development cluster
@@ -46,29 +38,21 @@ jobs:
           name: Notify failure
           when: on_fail
           command: |
-            TYPE="Deploy"
-            EXTRA_TEXT="```$(cat /tmp/deploy.log)```"
+            TYPE="Deploy" \
+            EXTRA_TEXT="\`\`\`
+            $(cat /tmp/deploy.log)
+            \`\`\`" \
             notify-job-failure.sh
-      - run:
-          name: Notify success
-          command: |
-            TYPE="Deploy"
-            EXTRA_TEXT="```$(make history)```"
-            notify-job-success.sh
-
+      - run: |
+          TYPE="Deploy" \
+          EXTRA_TEXT="\`\`\`$(make history)\`\`\`" \
+          notify-job-success.sh
   prod:
     <<: *defaults
     environment:
       GOOGLE_PROJECT_ID: planet4-production
     steps:
       - checkout
-      - run:
-          name: Install Helm 3
-          command: |
-            curl -fsSL \
-              https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 \
-              | bash
-            helm version
       - run: activate-gcloud-account.sh
       - deploy:
           name: Deploy to production cluster
@@ -77,16 +61,13 @@ jobs:
           name: Notify failure
           when: on_fail
           command: |
-            TYPE="Deploy"
-            EXTRA_TEXT="```$(cat /tmp/deploy.log)```"
+            TYPE="Deploy" \
+            EXTRA_TEXT="\`\`\`$(cat /tmp/deploy.log)\`\`\`" \
             notify-job-failure.sh
-      - run:
-          name: Notify success
-          command: |
-            TYPE="Deploy"
-            EXTRA_TEXT="```$(make history)```"
-            notify-job-success.sh
-
+      - run: |
+          TYPE="Deploy" \
+          EXTRA_TEXT="\`\`\`$(make history)\`\`\`" \
+          notify-job-success.sh
 workflows:
   version: 2
   commit:
