@@ -31,6 +31,13 @@ jobs:
     steps:
       - checkout
       - run: activate-gcloud-account.sh
+      - run:
+          name: Install Helm 3
+          command: |
+            curl -fsSL \
+              https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 \
+              | bash
+            helm version
       - deploy:
           name: Deploy to development cluster
           command: make dev | tee /tmp/deploy.log
@@ -54,6 +61,13 @@ jobs:
     steps:
       - checkout
       - run: activate-gcloud-account.sh
+      - run:
+          name: Install Helm 3
+          command: |
+            curl -fsSL \
+              https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 \
+              | bash
+            helm version
       - deploy:
           name: Deploy to production cluster
           command: make prod | tee /tmp/deploy.log
