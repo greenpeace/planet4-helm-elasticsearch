@@ -5,7 +5,7 @@ RELEASE-MASTER ?= $(PREFIX)-master
 RELEASE-DATA ?= $(PREFIX)-data
 RELEASE-CLIENT ?= $(PREFIX)-client
 NAMESPACE ?= elastic
-TIMEOUT := 1200
+TIMEOUT := 1200s
 
 CHART_NAME ?= elastic/elasticsearch
 CHART_VERSION ?= 7.17.1
