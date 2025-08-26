@@ -69,7 +69,7 @@ init:
 # ---------------------------
 # Development Deployment
 # ---------------------------
-dev:
+dev: init
 	gcloud config set project $(DEV_PROJECT)
 	gcloud container clusters get-credentials $(DEV_CLUSTER) --zone $(DEV_ZONE) --project $(DEV_PROJECT)
 	-kubectl create namespace $(NAMESPACE)
