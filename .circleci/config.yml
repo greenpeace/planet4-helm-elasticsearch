@@ -20,6 +20,11 @@ jobs:
           name: Install CircleCI CLI
           command: |
             curl -fLSs https://circle.ci/cli | bash
+      - run:
+          name: Install Helm 3
+          command: |
+            curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+            helm version
       - run: make lint | tee /tmp/lint.log
       - run:
           name: Notify failure
