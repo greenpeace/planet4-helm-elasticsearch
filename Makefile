@@ -36,7 +36,7 @@ init:
 	helm repo add elastic https://helm.elastic.co
 	helm repo update
 
-dev: 
+dev: init
 	gcloud config set project $(DEV_PROJECT)
 	gcloud container clusters get-credentials $(DEV_CLUSTER) --zone $(DEV_ZONE) --project $(DEV_PROJECT)
 	-kubectl create namespace $(NAMESPACE)
@@ -65,7 +65,7 @@ dev:
 		$(CHART_NAME)
 	helm history $(RELEASE-CLIENT) -n $(NAMESPACE) --max=5	
 
-prod:
+prod: init
 	gcloud config set project $(PROD_PROJECT)
 	gcloud container clusters get-credentials $(PROD_PROJECT) --zone $(PROD_ZONE) --project $(PROD_PROJECT)
 	-kubectl create namespace $(NAMESPACE)
