@@ -16,6 +16,10 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run:
+          name: Install CircleCI CLI
+          command: |
+            curl -fLSs https://circle.ci/cli | bash
       - run: make lint | tee /tmp/lint.log
       - run:
           name: Notify failure
