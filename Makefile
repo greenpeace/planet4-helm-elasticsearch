@@ -46,6 +46,7 @@ dev: init
 		--values values.yaml \
 		--values values-master.yaml \
 		--values env/dev/values-master.yaml \
+		--force \
 		$(CHART_NAME)
 	helm history $(RELEASE-MASTER) -n $(NAMESPACE) --max=5
 	helm upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-DATA) \
@@ -54,6 +55,7 @@ dev: init
 		--values values.yaml \
 		--values values-data.yaml \
 		--values env/dev/values-data.yaml \
+		--force \
 		$(CHART_NAME)
 	helm history $(RELEASE-DATA) -n $(NAMESPACE) --max=5
 	helm upgrade --install --timeout=$(TIMEOUT) --wait $(RELEASE-CLIENT) \
@@ -62,6 +64,7 @@ dev: init
 		--values values.yaml \
 		--values values-client.yaml \
 		--values env/dev/values-client.yaml \
+		--force \
 		$(CHART_NAME)
 	helm history $(RELEASE-CLIENT) -n $(NAMESPACE) --max=5	
 
