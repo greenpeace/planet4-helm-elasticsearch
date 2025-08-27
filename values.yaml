@@ -1,7 +1,7 @@
 ---
 clusterName: elasticsearch
-image: gcr.io/planet-4-151612/elasticsearch
-imageTag: 7.10.2
+image: us-central1-docker.pkg.dev/planet-4-151612/elasticsearch/elasticsearch
+imageTag: 9.1.2
 # https://www.elastic.co/guide/en/elasticsearch/reference/7.8/cluster-health.html#request-params_wait_for_status
 clusterHealthCheckParams: "wait_for_status=yellow&timeout=1s"
 
