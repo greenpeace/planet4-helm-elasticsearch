@@ -20,11 +20,6 @@ jobs:
           name: Install CircleCI CLI
           command: |
             curl -fLSs https://circle.ci/cli | bash
-      - run:
-          name: Install Helm 3
-          command: |
-            curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-            helm version
       - run: make lint | tee /tmp/lint.log
       - run:
           name: Notify failure
@@ -39,6 +34,11 @@ jobs:
       GOOGLE_PROJECT_ID: planet-4-151612
     steps:
       - checkout
+      - run:
+          name: Install Helm 3
+          command: |
+            curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+            helm version
       - run: activate-gcloud-account.sh
       - deploy:
           name: Deploy to development cluster
@@ -62,6 +62,11 @@ jobs:
       GOOGLE_PROJECT_ID: planet4-production
     steps:
       - checkout
+      - run:
+          name: Install Helm 3
+          command: |
+            curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+            helm version
       - run: activate-gcloud-account.sh
       - deploy:
           name: Deploy to production cluster
